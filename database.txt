@@ -1,0 +1,100 @@
+CREATE DATABASE Library_Management_System
+
+	CREATE TABLE Member
+	(
+
+		Member_Id 			INT AUTO_INCREMENT,	
+
+		First_Name			VARCHAR(200)		NOT NULL,
+		Middle_Name			VARCHAR(200)				,
+		Last_Name			VARCHAR(200)		NOT NULL,
+		NIC					VARCHAR(20)			NOT NULL UNIQUE,
+		Permanent_Address	VARCHAR(200)		NOT NULL,
+		Tele_Number			INT							,
+
+		CONSTRAINT pk_Member PRIMARY KEY (Member_Id)
+	)
+
+
+
+
+	CREATE TABLE Book
+	(
+		Book_ID				INT		AUTO_INCREMENT,
+		Book_Name			VARCHAR(100)				,
+		Book_Type			VARCHAR(100)		NOT NULL,
+		Book_Quantity		INT							,
+
+		CONSTRAINT pk_Book PRIMARY KEY (Book_ID)
+	);
+
+
+
+
+	CREATE TABLE Author
+	(
+		Author_Id 				INT		AUTO_INCREMENT,
+		
+		Author_Name				VARCHAR(100)		NOT NULL,	
+
+		CONSTRAINT pk_Author PRIMARY KEY (Author_Id)
+	);
+
+
+
+
+
+
+
+	CREATE TABLE Book_Author
+	(
+		Book_ID					INT			NOT NULL UNIQUE,
+		Author_Id			INT			NOT NULL,
+
+		CONSTRAINT pk_Book_Author PRIMARY KEY(Book_ID,Author_Id),
+		CONSTRAINT fk_Book_Author FOREIGN KEY(Book_ID) REFERENCES Book(Book_ID),
+								  FOREIGN KEY(Author_Id) REFERENCES Author(Author_Id)
+	);
+
+
+
+
+
+
+
+
+
+	CREATE TABLE Member_Book
+	(
+		Book_ID				INT					NOT NULL UNIQUE,
+		Member_Id			INT					NOT NULL,
+        Member_name			VARCHAR(200)		NOT NULL,
+        Book_Type			VARCHAR(100)		NOT NULL,
+        Book_Name			VARCHAR(100)				,
+		Issue_Date			VARCHAR(100)				NOT NULL,
+		Return_Date			VARCHAR(100)						,
+
+		CONSTRAINT pk_Member_Book PRIMARY KEY(Book_ID,Member_Id	),
+		CONSTRAINT fk_Member_Book FOREIGN KEY(Book_ID) REFERENCES Book(Book_ID),
+								  FOREIGN KEY(Member_Id) REFERENCES Member(Member_Id)
+	);
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE Login
+(
+    
+    roll_id 		INT 	AUTO_INCREMENT,
+    roll_name		VARCHAR(50)		NOT NULL,
+    username		VARCHAR(100)	UNIQUE NOT NULL,
+    password 		VARCHAR(100)	NOT NULL,
+    
+    CONSTRAINT pk_login PRIMARY KEY (roll_id)
+    );
